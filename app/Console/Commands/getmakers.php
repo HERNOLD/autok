@@ -3,7 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use App\Models\Maker;
+use function Laravel\Prompts\progress;
 
 class getmakers extends Command
 {
@@ -38,24 +39,30 @@ class getmakers extends Command
      */
     public function handle()
     {
-        $schemaName = $this->argument('name') ?: config("database.connections.mysql.database");
-        $charset = config("database.connections.mysql.charset",'utf8mb4');
-        $collation = config("database.connections.mysql.collation",'utf8mb4_unicode_ci');
-
-        $open = fopen("car-db.csv", "r");
-        $data = fgetcsv($open, 1000, ",");
-
-        while (($data = fgetcsv($open, 1000, ",")) !== FALSE) 
-        {
-            $maker_name=$data[1];
-
-            $query = "INSERT INTO autok (name) VALUES ($maker_name)";
-
-            DB::statement($query);
+        config(["database.connections.mysql.database" => 'autok']);
+ 
+        $file = fopen("car-db.csv","r");
+        fgetcsv($file, 1000, ',');
+        fgetcsv($file, 1000, ',');
+        $adatok = array();
+        while (($data = fgetcsv($file, 1000, ',')) !== FALSE) {
+            if(!in_array($data[1],$adatok)){
+                array_push($adatok, $data[1]);
+            }
         }
 
-        fclose($open);
+        $progressBar = progress(label:"Uploading makers", steps: count($adatok));
+        $progressBar->start();
 
-        config(["database.connections.mysql.database" => null]);
+        foreach ($adatok as $x) {
+            $enttity=new Maker();
+            $enttity->name=$x;
+            $enttity->save();
+            $progressBar->advance();
+        }
+
+        $progressBar->finish();
+ 
+        fclose($file);
     }
 }
