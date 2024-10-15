@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('models', function (Blueprint $table) {
+        Schema::create('fuels', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('maker_id');
-            $table->foreign('maker_id')->references('id')->on('makers');
             $table->string('name');
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('models');
+        Schema::dropIfExists('fuels');
     }
 };
