@@ -1,0 +1,12 @@
+td{
+    border: solid black 10px;
+    text-align: center;
+}
+.menu{
+    background-color: aqua;
+    border: red solid 3px;
+    padding-bottom: 1%;
+}
+svg{
+    width:20px;
+}

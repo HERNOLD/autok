@@ -12,7 +12,10 @@ class MakerController extends Controller
      */
     public function index()
     {
-        return view('makers/list', ['entities'=>Maker::all()]);
+        $sort_by = request()->query("sort_by", "name");
+        $sort_dir = request()->query("sort_dir", "asc");
+        $makers = Maker::orderBy($sort_by, $sort_dir)->paginate(10);
+        return view('makers/list', compact("makers"));
     }
 
     /**

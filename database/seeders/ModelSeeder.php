@@ -7,7 +7,7 @@ use App\Models\Maker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class getmodels extends Seeder
+class ModelSeeder extends Seeder
 {
     /**
      * Run the database seeds.

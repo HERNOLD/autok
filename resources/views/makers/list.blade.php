@@ -9,12 +9,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($entities as $entity)
+                @foreach($makers as $entity)
                     <tr>
                         <td id="{{$entity->id}}">{{$entity->id}}</td>
                         <td>{{$entity->name}}</td>
+                        <td><img src="{{$entity->logo}}" alt=""></td>
+                        <td><button>Törlés</button></td>
                     </tr>
                 @endforeach
+                {{$makers->links()}}
             </tbody>
         </table>
     </div>
