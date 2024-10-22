@@ -13,7 +13,16 @@
                     <tr>
                         <td id="{{$entity->id}}">{{$entity->id}}</td>
                         <td>{{$entity->name}}</td>
-                        <td><button>Törlés</button></td>
+                        <td>
+                            <form action="{{ route('fuels.delete', $entity->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="danger" onclick="return confirm('Tutira töröljük?')">Törlés</button>
+                            </form>
+                        </td>
+                        <td>
+                        <a href="{{ route('fuels.edit', $entity->id) }}" class="button">Szerkesztés</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

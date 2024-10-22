@@ -44,7 +44,8 @@ class FuelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $fuel = Fuels::find($id);
+        return view('fuels.edit', compact('fuel'));
     }
 
     /**
@@ -52,7 +53,11 @@ class FuelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fuel = Fuels::find($id);
+        $fuel->name = $request->name;
+        $fuel->save();
+
+        return view('fuels/list', ['entities'=>Fuels::all()]);
     }
 
     /**
@@ -60,6 +65,9 @@ class FuelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $fuel = Fuels::find($id);
+        $fuel->delete();
+
+        return view('fuels/list', ['entities'=>Fuels::all()]);
     }
 }

@@ -63,6 +63,8 @@ class MakerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        $maker->delete();
+        return view('makers/list', compact("makers"));
     }
 }

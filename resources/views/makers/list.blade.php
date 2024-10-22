@@ -14,7 +14,13 @@
                         <td id="{{$entity->id}}">{{$entity->id}}</td>
                         <td>{{$entity->name}}</td>
                         <td><img src="{{$entity->logo}}" alt=""></td>
-                        <td><button>Törlés</button></td>
+                        <td>
+                            <form action="{{ route('makers.delete', $entity->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="danger" onclick="return confirm('Tutira töröljük?')">Törlés</button>
+                            </form>               
+                        </td>
                     </tr>
                 @endforeach
                 {{$makers->links()}}

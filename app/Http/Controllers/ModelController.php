@@ -47,7 +47,8 @@ class ModelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $model = Models::find($id);
+        return view('models.edit', compact('model'));
     }
 
     /**
@@ -55,7 +56,14 @@ class ModelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $model = Models::find($id);
+        $model->name = $request->name;
+        $model->save();
+
+        $sort_by = request()->query("sort_by", "name");
+        $sort_dir = request()->query("sort_dir", "asc");
+        $entities = Models::orderBy($sort_by, $sort_dir)->paginate(10);
+        return view('models/list', compact("entities"));
     }
 
     /**
@@ -63,6 +71,12 @@ class ModelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $model = Models::find($id);
+        $model->delete();
+        
+        $sort_by = request()->query("sort_by", "name");
+        $sort_dir = request()->query("sort_dir", "asc");
+        $entities = Models::orderBy($sort_by, $sort_dir)->paginate(10);
+        return view('models/list', compact("entities"));
     }
 }
