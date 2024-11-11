@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Maker;
 use Illuminate\Http\Request;
 
-class MakerController extends Controller
+class ColorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $sort_by = request()->query("sort_by", "name");
-        $sort_dir = request()->query("sort_dir", "asc");
-        $makers = Maker::orderBy($sort_by, $sort_dir)->paginate(10);
-        return view('makers/list', compact("makers"));
+        //
     }
 
     /**
@@ -47,8 +43,7 @@ class MakerController extends Controller
      */
     public function edit(string $id)
     {
-        $maker = Maker::find($id);
-        return view('makers.edit', compact('maker'));
+        //
     }
 
     /**
@@ -56,11 +51,7 @@ class MakerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $maker = Maker::find($id);
-        $maker->name = $request->name;
-        $maker->save();
-
-        return redirect()->route("makers.get");
+        //
     }
 
     /**
@@ -68,19 +59,6 @@ class MakerController extends Controller
      */
     public function destroy(string $id)
     {
-        $maker = Maker::find($id);
-        $maker->delete();
-        
-        return redirect()->route("makers.get");
-    }
-
-    public function models(string $makerId)
-    {
-        $maker=Maker::find($makerId);
-        $models=$maker->models;
-
-        $result['data']=$models;
-
-        return response()->json($result);
+        //
     }
 }

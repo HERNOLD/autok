@@ -7,7 +7,7 @@
     @method('PATCH')
     <fieldset>
         <label for="name">Benzin név</label>
-        <input type="text" name="name" id="name" value="{{ old('name', $fuel->name) }}">
+        <input type="text" name="name" id="name" value="{{ old('name', $entity->maker->name)}}">
     </fieldset>
     <button type="submit">Ment</button>
 </form>

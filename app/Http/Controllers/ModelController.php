@@ -74,9 +74,6 @@ class ModelController extends Controller
         $model = Models::find($id);
         $model->delete();
         
-        $sort_by = request()->query("sort_by", "name");
-        $sort_dir = request()->query("sort_dir", "asc");
-        $entities = Models::orderBy($sort_by, $sort_dir)->paginate(10);
-        return view('models/list', compact("entities"));
+        return redirect()->route("models");
     }
 }

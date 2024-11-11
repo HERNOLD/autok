@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>{{config('app.name', 'Carlog')}}</title>
     <link rel="stylesheet" href="/style.css">
+    <script src="{{asset('js/jQuery-3.7.1.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
 </head>
 <body>
     <!-- kell gomb ami megjeleníti az autógyártókat -->
@@ -15,9 +17,11 @@
             <h1>Autó kezelő cucc dolog</h1>
             <div class="menu">
                 <a href="{{route("home")}}">Home</a>
-                <a href="{{route("makers.get")}}">Makers</a>
+                <a href="{{route("makers")}}">Makers</a>
                 <a href="{{route("fuels")}}">Fuels</a>
                 <a href="{{route("models")}}">Models</a>
+                <a href="{{route("cars.show")}}">Cars</a>
+                <a href="{{route("cars")}}">Make a car</a>
             </div>
             <main class="py-4">
                 @yield('content')
