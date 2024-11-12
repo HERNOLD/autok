@@ -57,10 +57,15 @@ class MakerController extends Controller
     public function update(Request $request, string $id)
     {
         $maker = Maker::find($id);
+
+        $request->validate([
+            'name' => 'required|min:2|max:255',
+        ]);
+
         $maker->name = $request->name;
         $maker->save();
 
-        return redirect()->route("makers.get");
+        return redirect()->route("makers");
     }
 
     /**
@@ -71,7 +76,7 @@ class MakerController extends Controller
         $maker = Maker::find($id);
         $maker->delete();
         
-        return redirect()->route("makers.get");
+        return redirect()->route("makers");
     }
 
     public function models(string $makerId)

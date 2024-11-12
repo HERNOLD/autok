@@ -57,6 +57,11 @@ class ModelController extends Controller
     public function update(Request $request, string $id)
     {
         $model = Models::find($id);
+
+        $request->validate([
+            'name' => 'required|min:2|max:255',
+        ]);
+
         $model->name = $request->name;
         $model->save();
 

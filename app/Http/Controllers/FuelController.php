@@ -54,6 +54,11 @@ class FuelController extends Controller
     public function update(Request $request, string $id)
     {
         $fuel = Fuels::find($id);
+
+        $request->validate([
+            'name' => 'required|min:2|max:255',
+        ]);
+
         $fuel->name = $request->name;
         $fuel->save();
 

@@ -23,7 +23,6 @@ $(document).ready(function() {
                     var id = response['data'][i].id;
                     var name = response['data'][i].name;
                     var option = "<option value='" + id + "'>" + name + "</option>";
-
                     $("#model").append(option);
                 }
             }

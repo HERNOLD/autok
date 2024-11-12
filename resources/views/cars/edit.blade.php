@@ -5,6 +5,17 @@
 <form action="{{ route('cars.update', $car->id) }}" method="post">
     @csrf
     @method('PATCH')
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <fieldset>
         <label for="name">Autó gyártó</label>
         <select name="maker" id="maker">
