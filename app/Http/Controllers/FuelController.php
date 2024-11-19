@@ -62,7 +62,7 @@ class FuelController extends Controller
         $fuel->name = $request->name;
         $fuel->save();
 
-        return view('fuels/list', ['entities'=>Fuels::all()]);
+        return redirect()->route("fuels")->with('success', 'Sikeres módosítás');
     }
 
     /**
@@ -73,6 +73,6 @@ class FuelController extends Controller
         $fuel = Fuels::find($id);
         $fuel->delete();
 
-        return view('fuels/list', ['entities'=>Fuels::all()]);
+        return redirect()->route("fuels")->with('success', 'Sikeres törlés');
     }
 }

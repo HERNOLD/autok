@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    
-
     var id=$('#maker').val();
     $('#model').find('option').remove();
 
@@ -18,7 +16,7 @@ $(document).ready(function() {
             }
 
             if (len > 0) {
-                // Read data and create <option >
+                // Read data and create <option>
                 for (var i = 0; i < len; i++) {
                     var id = response['data'][i].id;
                     var name = response['data'][i].name;

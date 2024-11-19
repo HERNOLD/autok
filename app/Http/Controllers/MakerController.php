@@ -65,7 +65,7 @@ class MakerController extends Controller
         $maker->name = $request->name;
         $maker->save();
 
-        return redirect()->route("makers");
+        return redirect()->route("makers")->with('success', 'Sikeres módosítás');
     }
 
     /**
@@ -76,7 +76,7 @@ class MakerController extends Controller
         $maker = Maker::find($id);
         $maker->delete();
         
-        return redirect()->route("makers");
+        return redirect()->route("makers")->with('success','Sikeresen törölve');
     }
 
     public function models(string $makerId)

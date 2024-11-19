@@ -18,7 +18,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('cars/list', ['entities'=>Car::all()]);
+        return view('cars/list', ['entities'=>Car::all(), 'makers'=>Maker::all(), 'models'=>Models::all(), 'colors'=>Color::all(), 'fuels'=>Fuels::all(), 'bodies'=>Body::all(), 'shifts'=>GearShift::all()]);
     }
 
     /**
@@ -34,16 +34,26 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $car = new Car;
-        $car->maker_id=$request->maker;
-        $car->model_id=$request->model;
-        $car->fuel_id=$request->fuel;
-        $car->gear_id=$request->shift;
-        $car->body_id=$request->body;
-        $car->color_id=$request->color;
+        $validatedData = $request->validate([
+            'maker' => 'required|exists:makers,id',
+            'model' => 'required|exists:models,id',
+            'fuel' => 'required|exists:fuels,id',
+            'shift' => 'required|exists:gear_shifts,id',
+            'body' => 'required|exists:bodies,id',
+            'color' => 'required|exists:colors,id',
+        ]);
+
+        $car = new Car();
+        $car->maker_id = $validatedData['maker'];
+        $car->model_id = $validatedData['model'];
+        $car->fuel_id = $validatedData['fuel'];
+        $car->gear_id = $validatedData['shift'];
+        $car->body_id = $validatedData['body'];
+        $car->color_id = $validatedData['color'];
         $car->save();
 
-        return view('cars/list', ['entities'=>Car::all(), 'makers'=>Maker::all(), 'models'=>Models::all(), 'colors'=>Color::all(), 'fuels'=>Fuels::all(), 'bodies'=>Body::all(), 'shifts'=>GearShift::all()]);
+        return redirect()->route('cars.show', ['id' => $car->id])
+                         ->with('success', 'New Car sikeresen létrehozva!');
     }
 
     /**
@@ -51,7 +61,7 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -77,7 +87,7 @@ class CarController extends Controller
         $car->color_id=$request->color;
         $car->save();
 
-        return view('cars/list', ['entities'=>Car::all()]);
+        return redirect()->route("cars.show")->with('success', 'Sikeres módosítás');
     }
 
     /**
@@ -88,6 +98,6 @@ class CarController extends Controller
         $car = Car::find($id);
         $car->delete();
         
-        return redirect()->route("cars.show");
+        return redirect()->route("cars.show")->with('success', 'Sikeresen törölve');
     }
 }

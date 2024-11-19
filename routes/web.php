@@ -26,9 +26,10 @@ Route::delete('models/{id}', [ModelController::class, 'destroy'])->name('models.
 Route::get('models/{id}', [ModelController::class, 'edit'])->name('models.edit');
 Route::patch('models/{id}', [ModelController::class, 'update'])->name('models.update');
 
-Route::get('cars', [CarController::class, 'create'])->name('cars');
-Route::get('cars/create', [CarController::class, 'store'])->name('cars.create');
-Route::get('cars/show', [CarController::class, 'index'])->name('cars.show');
+Route::get('cars', [CarController::class, 'index'])->name('cars');  // lista
+Route::get('cars/create', [CarController::class, 'create'])->name('cars.create'); // űrlap
+Route::post('cars', [CarController::class, 'store'])->name('cars.store');  // adat mentése
+Route::get('cars/show', [CarController::class, 'index'])->name('cars.show'); // autók listája
 Route::delete('cars/{id}', [CarController::class, 'destroy'])->name('cars.delete');
 Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit');
 Route::patch('cars/{id}', [CarController::class, 'update'])->name('cars.update');

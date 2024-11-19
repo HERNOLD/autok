@@ -21,7 +21,7 @@
                 <a href="{{route("fuels")}}">Fuels</a>
                 <a href="{{route("models")}}">Models</a>
                 <a href="{{route("cars.show")}}">Cars</a>
-                <a href="{{route("cars")}}">Make a car</a>
+                <a href="{{route("cars.create")}}">Make a car</a>
             </div>
             <main class="py-4">
                 @yield('content')
